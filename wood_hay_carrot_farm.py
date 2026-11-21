@@ -1,9 +1,9 @@
-def traversal(func):
+def traverse(func):
 	for i in range(get_world_size()):
 		for j in range(get_world_size()):
 			func()
 			move(North)
-		incr_counter()
+		incr_index()
 		move(East)
 
 def hay():
@@ -31,25 +31,25 @@ def carrot():
 		plant(Entities.Carrot)
 
 def rotate_plant():
-	if counter == 0:
+	if plant_index == 0:
 		hay()
-	elif counter == 1:
+	elif plant_index == 1:
 		wood()
 	else:
 		carrot()
-	incr_counter()
+	incr_index()
 
-def incr_counter():
-	global counter
-	counter = (counter + 1) % 3
+def incr_index():
+	global plant_index
+	plant_index = (plant_index + 1) % 3
 
 def main():
 	clear()
-	global counter
-	counter = 0
-	change_hat(Hats.Wizard_Hat)
+	change_hat(Hats.Tree_Hat)
+	global plant_index
 	while True:
-		traversal(rotate_plant)
+		plant_index = 0
+		traverse(rotate_plant)
 
 if __name__ == "__main__":
 	main()
