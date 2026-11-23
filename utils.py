@@ -1,7 +1,9 @@
+world_size = get_world_size()
+
 def move_to_origin():
 	world_size = get_world_size()
 
-	y = get_pos_x()
+	y = get_pos_y()
 	if y >= world_size / 2:
 		for i in range(world_size - y):
 			move(North)

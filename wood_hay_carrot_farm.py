@@ -1,8 +1,15 @@
-def traverse(func):
-	for i in range(get_world_size()):
-		for j in range(get_world_size()):
-			func()
+import utils
+import sunflower_farm
+
+def single_run():
+	for i in range(utils.world_size):
+		for j in range(utils.world_size):
+			if get_entity_type() == Entities.Sunflower:
+				sunflower_farm.check_sunflower()
+			else:
+				rotate_plant()
 			move(North)
+			incr_index()
 		incr_index()
 		move(East)
 
@@ -37,7 +44,6 @@ def rotate_plant():
 		wood()
 	else:
 		carrot()
-	incr_index()
 
 def incr_index():
 	global plant_index
@@ -47,9 +53,10 @@ def main():
 	clear()
 	change_hat(Hats.Tree_Hat)
 	global plant_index
+	sunflower_farm.plant_run()
 	while True:
 		plant_index = 0
-		traverse(rotate_plant)
+		single_run()
 
 if __name__ == "__main__":
 	main()
